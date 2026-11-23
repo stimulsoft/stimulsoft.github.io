@@ -1,0 +1,12 @@
+# Stimulsoft Documentation
+
+> Manuals for Stimulsoft Reports, Dashboards, Server and Cloud. Every manual has its own llms.txt with links to the Markdown version of each page.
+
+## Manuals
+
+- [Stimulsoft Reports User Manual](https://docs.stimulsoft.com/Stimulsoft.Reports.Dashboards.User.Manual/llms.txt): the report designer and viewer, reports, charts, dashboards, data, exports
+- [Stimulsoft Reports Programming Manual](https://docs.stimulsoft.com/Stimulsoft.Reports.Dashboards.Programming.Manual/llms.txt): integration for .NET, WEB, JS, PHP, Java, Python and WPF
+- [Stimulsoft Server User Manual](https://docs.stimulsoft.com/Stimulsoft.Server.Manual/llms.txt): installation and administration of the on-premise server
+- [Stimulsoft Server API](https://docs.stimulsoft.com/Stimulsoft.Server.API.Manual/llms.txt): REST API and .NET SDK of Stimulsoft Server
+- [Stimulsoft Cloud API](https://docs.stimulsoft.com/Stimulsoft.Cloud.API.Manual/llms.txt): REST and .NET API of Stimulsoft Cloud
+- [Developer FAQ](https://docs.stimulsoft.com/Developer-FAQ/): frequently asked questions by platform
