@@ -6,69 +6,1075 @@
   <title>Stimulsoft Documentation</title>
   <meta name="description" content="Documentation for Stimulsoft Reports, Dashboards, Server and Cloud: user manuals, programming manuals, API references and the developer FAQ.">
   <link rel="canonical" href="https://docs.stimulsoft.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Stimulsoft Documentation">
+  <meta property="og:title" content="Stimulsoft Documentation">
+  <meta property="og:url" content="https://docs.stimulsoft.com/">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      /* hljs sheets are toggled after DOM loads via applyHljsTheme */
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- The styles repeat the manuals' layout (_template/_layouts/default.html) to keep one look. -->
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --header-height: 56px;
+      --sidebar-width: 260px;
+      --content-max: 1280px;
+      --color-bg: #ffffff;
+      --color-sidebar-bg: #ffffff;
+      --color-border: #e7e9eb;
+      --color-text: #1a1a1a;
+      --color-text-muted: #6b7280;
+      --color-text-sidebar: #374151;
+      --color-accent: #338adb;
+      --color-accent-bg: #e8f3fb;
+      --color-hover-bg: #f3f4f6;
+      --color-code-bg: #f6f8fa;
+      --color-active-text: #1a6fb5;
+      --color-text-secondary: #374151;
+      --color-blockquote-text: #1e40af;
+      --color-mark-bg: #fef08a;
+      --color-row-hover: #fafafa;
+      --color-scrollbar: #d1d5db;
+      --color-copy-btn-bg: #ffffff;
+      --color-bc-sep: #d1d5db;
+      --color-placeholder: #9ca3af;
+      --color-shadow: rgba(0,0,0,0.1);
+      --color-overlay: rgba(0,0,0,0.4);
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #0d1117;
+      --color-sidebar-bg: #0d1117;
+      --color-border: #30363d;
+      --color-text: #e6edf3;
+      --color-text-muted: #8b949e;
+      --color-text-sidebar: #c9d1d9;
+      --color-accent: #58a6ff;
+      --color-accent-bg: #1a2332;
+      --color-hover-bg: #161b22;
+      --color-code-bg: #161b22;
+      --color-active-text: #79c0ff;
+      --color-text-secondary: #c9d1d9;
+      --color-blockquote-text: #79c0ff;
+      --color-mark-bg: #4a3f00;
+      --color-row-hover: #161b22;
+      --color-scrollbar: #484f58;
+      --color-copy-btn-bg: #21262d;
+      --color-bc-sep: #484f58;
+      --color-placeholder: #6e7681;
+      --color-shadow: rgba(0,0,0,0.4);
+      --color-overlay: rgba(0,0,0,0.6);
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 15px;
       line-height: 1.7;
-      color: #1a1a1a;
-      background: #ffffff;
+      color: var(--color-text);
+      background: var(--color-bg);
+      display: block;
     }
-    main { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
-    h1 { font-size: 30px; font-weight: 600; line-height: 1.25; margin-bottom: 8px; }
-    main > p { color: #6b7280; margin-bottom: 32px; }
-    ul { list-style: none; }
-    li { padding: 16px 0; border-top: 1px solid #e7e9eb; }
-    li a { font-size: 17px; font-weight: 600; color: #338adb; text-decoration: none; }
-    li a:hover { text-decoration: underline; }
-    li p { color: #374151; }
-    footer { margin-top: 32px; color: #6b7280; }
-    footer a { color: #338adb; }
-    @media (prefers-color-scheme: dark) {
-      body { color: #e6edf3; background: #0d1117; }
-      main > p, footer { color: #8b949e; }
-      li { border-color: #30363d; }
-      li p { color: #c9d1d9; }
-      li a, footer a { color: #58a6ff; }
+
+    /* ── Header ── */
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      height: var(--header-height);
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    #header-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+
+    #logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    #logo img {
+      height: 28px;
+      display: block;
+    }
+
+    /* Header search (desktop - inline in header) */
+    #header-search {
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      justify-self: center;
+    }
+
+    #search-input {
+      width: 100%;
+      padding: 7px 10px 7px 32px;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: var(--color-sidebar-bg);
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--color-text);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    #search-input:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+      background: var(--color-bg);
+    }
+
+    #search-input::placeholder { color: var(--color-placeholder); }
+
+    #header-search::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+      pointer-events: none;
+    }
+
+    #search-results {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 6px);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px var(--color-shadow);
+      max-height: 60vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    #search-results.visible { display: block; }
+
+    #search-results a {
+      display: block;
+      padding: 10px 14px;
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text);
+    }
+
+    #search-results a:last-child { border-bottom: none; }
+    #search-results a:hover { background: var(--color-hover-bg); }
+
+    .search-result-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+
+    .search-result-excerpt {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-result-excerpt mark {
+      background: var(--color-mark-bg);
+      color: var(--color-text);
+      border-radius: 2px;
+    }
+
+    #search-empty {
+      padding: 16px 14px;
+      font-size: 13px;
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+    /* Header nav links */
+    #header-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      justify-self: end;
+    }
+
+    #header-nav a {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.1s, color 0.1s;
+      white-space: nowrap;
+    }
+
+    #header-nav a:hover {
+      background: var(--color-hover-bg);
+      color: var(--color-text);
+    }
+
+    /* ── Page body (centered) ── */
+    #page {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      display: flex;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      position: sticky;
+      top: var(--header-height);
+      height: calc(100vh - var(--header-height));
+      background: var(--color-sidebar-bg);
+      border-right: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 8px 24px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-scrollbar) transparent;
+      scrollbar-gutter: stable;
+    }
+
+    #sidebar-nav::-webkit-scrollbar { width: 4px; }
+    #sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+    #sidebar-nav::-webkit-scrollbar-thumb { background: var(--color-scrollbar); border-radius: 2px; }
+
+    #sidebar-nav ul { list-style: none; }
+    #sidebar-nav li { margin: 1px 0; }
+
+    #sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      color: var(--color-text-sidebar);
+      text-decoration: none;
+      font-size: 13.5px;
+      line-height: 1.4;
+      transition: background 0.1s, color 0.1s;
+    }
+
+    #sidebar-nav a:hover {
+      background: var(--color-hover-bg);
+      color: var(--color-text);
+    }
+
+    #sidebar-nav a.active {
+      background: var(--color-hover-bg);
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    /* Top-level items */
+    #sidebar-nav > ul > li > a {
+      font-weight: 500;
+      color: var(--color-text);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    /* Nested lists */
+    #sidebar-nav li ul {
+      display: none;
+      padding-left: 10px;
+      border-left: 1px solid var(--color-border);
+      margin: 2px 0 2px 10px;
+    }
+
+    #sidebar-nav li.open > ul { display: block; }
+
+    /* Chevron icon */
+    #sidebar-nav li.has-children > a::after {
+      content: "";
+      display: inline-block;
+      margin-left: auto;
+      width: 14px;
+      height: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236b7280'%3E%3Cpath fill-rule='evenodd' d='M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z' clip-rule='evenodd'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+
+    #sidebar-nav li.has-children.open > a::after {
+      transform: rotate(90deg);
+    }
+
+    /* ── Main content ── */
+    #main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    #content {
+      width: 100%;
+      padding: 24px 56px 80px;
+    }
+
+    /* ── Breadcrumbs ── */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .breadcrumbs a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+    }
+
+    .breadcrumbs a:hover { color: var(--color-accent); }
+
+    .bc-sep { color: var(--color-bc-sep); font-size: 12px; }
+
+    .bc-current { color: var(--color-text); font-weight: 500; }
+
+    /* ── Typography ── */
+    #content h1 {
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      color: var(--color-text);
+    }
+
+    #content h2 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 36px 0 12px;
+      padding-top: 36px;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text);
+    }
+
+    #content h2:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    #content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 28px 0 10px;
+      color: var(--color-text);
+    }
+
+    #content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 20px 0 8px;
+    }
+
+    #content h1 + p,
+    #content h1 + ul,
+    #content h1 + ol { color: var(--color-text-muted); }
+
+    #content p { margin-bottom: 16px; color: var(--color-text-secondary); }
+
+    #content ul, #content ol { margin: 0 0 16px 20px; color: var(--color-text-secondary); }
+
+    #content li { margin-bottom: 6px; }
+    #content li > p { margin-bottom: 4px; }
+
+    #content a { color: var(--color-accent); text-decoration: none; }
+    #content a:hover { text-decoration: underline; }
+
+    #content img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid var(--color-border);
+      vertical-align: middle;
+    }
+
+    /* Standalone image paragraph (set by JS below) */
+    #content p.img-block {
+      margin: 20px 0;
+    }
+    #content p.img-block img {
+      display: block;
+    }
+
+    /* Inline image - image alongside text → no border, no radius, aligned to text */
+    #content p:not(.img-block) img {
+      border: none;
+      border-radius: 0;
+      vertical-align: middle;
+      display: inline;
+    }
+
+    /* ── Code blocks ── */
+    #content pre {
+      background: var(--color-code-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      margin: 20px 0;
+      font-size: 13.5px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    #content pre .hljs {
+      background: transparent;
+      padding: 0;
+      display: block;
+    }
+
+    #content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
+    }
+
+    #content code {
+      background: var(--color-code-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 13px;
+      font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
+      color: var(--color-text);
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 10px;
+      background: var(--color-copy-btn-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 5px;
+      color: var(--color-text-muted);
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s, background 0.15s;
+      line-height: 1.4;
+    }
+
+    #content pre:hover .copy-btn { opacity: 1; }
+
+    .copy-btn:hover { background: var(--color-hover-bg); color: var(--color-text); }
+
+    .copy-btn.copied { color: #16a34a; border-color: #bbf7d0; opacity: 1; }
+
+    /* ── Copy as Markdown button ── */
+    #content-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    #content-header-crumbs {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* breadcrumbs inside the header row - remove its own bottom margin */
+    #content-header .breadcrumbs {
+      margin-bottom: 0;
+    }
+
+    #copy-md-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: transparent;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      color: var(--color-text-muted);
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      line-height: 1.4;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    #copy-md-btn:hover {
+      background: var(--color-hover-bg);
+      color: var(--color-text);
+    }
+
+    #copy-md-btn.copied {
+      color: #16a34a;
+      border-color: #bbf7d0;
+    }
+
+    #copy-md-btn svg {
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .copy-md-label { display: none; }
+    }
+
+    /* ── Product block ── */
+    #product-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 0 56px 64px;
+      padding: 20px 24px;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-accent-bg);
+    }
+
+    #product-cta-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    #product-cta-text strong { font-weight: 600; color: var(--color-text); }
+    #product-cta-text span { font-size: 14px; color: var(--color-text-secondary); }
+
+    #product-cta-links { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
+    #product-cta-links a { font-size: 14px; color: var(--color-accent); text-decoration: none; }
+    #product-cta-links a:hover { text-decoration: underline; }
+
+    #product-cta-links a.cta-primary {
+      padding: 7px 16px;
+      border-radius: 6px;
+      background: var(--color-accent);
+      color: var(--color-bg);
+      font-weight: 500;
+    }
+
+    #product-cta-links a.cta-primary:hover { text-decoration: none; opacity: 0.9; }
+
+    @media (max-width: 768px) {
+      #product-cta { margin: 0 20px 48px; }
+    }
+
+    /* ── Tables ── */
+    #content table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    #content thead tr {
+      background: var(--color-code-bg);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    #content th {
+      padding: 10px 14px;
+      font-weight: 600;
+      text-align: left;
+      color: var(--color-text);
+    }
+
+    #content td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+    }
+
+    #content tr:last-child td { border-bottom: none; }
+    #content tr:hover td { background: var(--color-row-hover); }
+
+    #content blockquote {
+      border-left: 3px solid var(--color-accent);
+      background: var(--color-accent-bg);
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 20px 0;
+      color: var(--color-blockquote-text);
+    }
+
+    #content blockquote p { color: inherit; margin: 0; }
+
+    #content hr {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 32px 0;
+    }
+
+    /* ── Mobile menu toggle button ── */
+    #menu-toggle {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      transition: background 0.1s, color 0.1s;
+    }
+    #menu-toggle:hover { background: var(--color-hover-bg); color: var(--color-text); }
+
+    /* ── Mobile search toggle (icon, hidden on desktop) ── */
+    #search-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      padding: 6px 8px;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      border-radius: 6px;
+      transition: background 0.1s, color 0.1s;
+    }
+    #search-toggle:hover { background: var(--color-hover-bg); color: var(--color-text); }
+
+    /* ── Mobile search close button ── */
+    #search-close {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      font-size: 20px;
+      line-height: 1;
+      border-radius: 6px;
+      transition: background 0.1s, color 0.1s;
+      white-space: nowrap;
+    }
+    #search-close:hover { background: var(--color-hover-bg); color: var(--color-text); }
+
+    /* ── Sidebar overlay (mobile) ── */
+    #sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--color-overlay);
+      z-index: 40;
+    }
+    #sidebar-overlay.visible { display: block; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      #header-nav { display: none; }
+      #header-search { display: none; }
+      #search-toggle { display: flex; }
+      #menu-toggle { display: flex; }
+      #header-inner { grid-template-columns: auto 1fr; }
+      #header-actions { display: flex; align-items: center; gap: 4px; justify-self: end; }
+      #page { flex-direction: column; }
+
+      /* Search-open mode: full-width search bar in header */
+      #site-header.search-open #header-inner { grid-template-columns: 1fr auto; gap: 8px; }
+      #site-header.search-open #logo { display: none; }
+      #site-header.search-open #header-actions { display: none; }
+      #site-header.search-open #header-search { display: block; max-width: none; }
+      #site-header.search-open #search-close { display: flex; }
+
+      #sidebar {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        width: 85%;
+        max-width: 320px;
+        height: calc(100vh - var(--header-height));
+        z-index: 45;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-shadow: 4px 0 16px rgba(0,0,0,0.12);
+        min-width: unset;
+      }
+      #sidebar.open { transform: translateX(0); }
+      #sidebar-nav { max-height: none; height: 100%; }
+      #content { padding: 24px 20px 48px; }
+    }
+    /* ── Theme toggle button ── */
+    #theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      transition: color 0.15s;
+      margin-left: 8px;
+    }
+    #theme-toggle:hover { color: var(--color-text); }
+
+    /* Show sun in dark mode, moon in light mode */
+    [data-theme="light"] #theme-toggle .icon-sun,
+    :root:not([data-theme]) #theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] #theme-toggle .icon-moon,
+    :root:not([data-theme]) #theme-toggle .icon-moon { display: block; }
+    [data-theme="dark"] #theme-toggle .icon-sun { display: block; }
+    [data-theme="dark"] #theme-toggle .icon-moon { display: none; }
+
+    /* ── Logo theme switching ── */
+    .logo-light { display: block; }
+    .logo-dark { display: none !important; }
+    [data-theme="dark"] .logo-light { display: none !important; }
+    [data-theme="dark"] .logo-dark { display: block !important; }
+
+    /* ── Dark mode adjustments ── */
+    [data-theme="dark"] #content img:not(.logo-dark) { border-color: var(--color-border); }
+    [data-theme="dark"] #search-input:focus { box-shadow: 0 0 0 3px rgba(88,166,255,0.15); }
+    [data-theme="dark"] #sidebar { box-shadow: none; }
+
+    .sidebar-heading {
+      padding: 16px 16px 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      letter-spacing: 0.01em;
+    }
+    .sidebar-heading-divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 0 0 8px;
+    }
+
+    /* Home page */
+    #home {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+    #home h1 {
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    #home .home-lead {
+      color: var(--color-text-muted);
+      margin-bottom: 32px;
+    }
+    #home-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    #home-list a {
+      display: block;
+      height: 100%;
+      padding: 18px 20px;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    #home-list a:hover {
+      border-color: var(--color-accent);
+      background: var(--color-hover-bg);
+    }
+    .home-title {
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+    .home-text {
+      display: block;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
+    #home-footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid var(--color-border);
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+    #home-footer a { color: var(--color-accent); text-decoration: none; }
+    #home-footer a:hover { text-decoration: underline; }
+    .search-result-section {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-bottom: 2px;
+    }
+    @media (max-width: 768px) {
+      #home { padding: 32px 20px 48px; }
+      #home-list { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <main>
+
+  <header id="site-header">
+    <div id="header-inner">
+      <a id="logo" href="/" title="Stimulsoft Documentation">
+        <img class="logo-light" src="/logo-light.svg" alt="Stimulsoft">
+        <img class="logo-dark" src="/logo-dark.svg" alt="Stimulsoft">
+      </a>
+
+      <!-- Desktop: inline search in center column -->
+      <div id="header-search">
+        <input id="search-input" type="search" placeholder="Search documentation..." autocomplete="off" spellcheck="false">
+        <div id="search-results"></div>
+      </div>
+
+      <!-- Desktop: nav links (right column) / Mobile: search+menu buttons -->
+      <div id="header-actions">
+        <button id="search-toggle" aria-label="Open search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+
+        <nav id="header-nav">
+          <a href="https://www.youtube.com/user/StimulsoftVideos" target="_blank" rel="noopener">Video</a>
+          <a href="https://github.com/stimulsoft" target="_blank" rel="noopener">Samples</a>
+          <a href="https://www.stimulsoft.com/en/support" target="_blank" rel="noopener">Support</a>
+          <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+        </nav>
+      </div>
+
+      <button id="search-close" aria-label="Close search">&#x2715;</button>
+    </div>
+  </header>
+
+  <main id="home">
     <h1>Stimulsoft Documentation</h1>
-    <p>Manuals and references for Stimulsoft Reports, Dashboards, Server and Cloud.</p>
-    <ul>
-      <li>
-        <a href="/Stimulsoft.Reports.Dashboards.User.Manual/">Stimulsoft Reports User Manual</a>
-        <p>The report designer and viewer, creating reports and dashboards, charts, data connections, exports.</p>
-      </li>
-      <li>
-        <a href="/Stimulsoft.Reports.Dashboards.Programming.Manual/">Stimulsoft Reports Programming Manual</a>
-        <p>Embedding viewers and designers, data sources, exports and licensing for .NET, WEB, JS, PHP, Java, Python and WPF.</p>
-      </li>
-      <li>
-        <a href="/Stimulsoft.Server.Manual/">Stimulsoft Server User Manual</a>
-        <p>Installation, Docker deployment, SSO, users and roles, schedulers and administration of the on-premise server.</p>
-      </li>
-      <li>
-        <a href="/Stimulsoft.Server.API.Manual/">Stimulsoft Server API</a>
-        <p>REST API and .NET SDK for users, roles, workspaces, items, schedulers and report export.</p>
-      </li>
-      <li>
-        <a href="/Stimulsoft.Cloud.API.Manual/">Stimulsoft Cloud API</a>
-        <p>REST and .NET API of Stimulsoft Cloud: authentication, items, templates, snapshots, schedulers, export.</p>
-      </li>
-      <li>
-        <a href="/Developer-FAQ/">Developer FAQ</a>
-        <p>Frequently asked questions for every platform.</p>
-      </li>
+    <p class="home-lead">Manuals and references for Stimulsoft Reports, Dashboards, Server and Cloud.</p>
+    <ul id="home-list">
+        <li>
+          <a href="/Stimulsoft.Reports.Dashboards.User.Manual/">
+            <span class="home-title">Stimulsoft Reports User Manual</span>
+            <span class="home-text">The report designer and viewer, creating reports and dashboards, charts, data connections, exports.</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Stimulsoft.Reports.Dashboards.Programming.Manual/">
+            <span class="home-title">Stimulsoft Reports Programming Manual</span>
+            <span class="home-text">Embedding viewers and designers, data sources, exports and licensing for .NET, WEB, JS, PHP, Java, Python and WPF.</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Stimulsoft.Server.Manual/">
+            <span class="home-title">Stimulsoft Server User Manual</span>
+            <span class="home-text">Installation, Docker deployment, SSO, users and roles, schedulers and administration of the on-premise server.</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Stimulsoft.Server.API.Manual/">
+            <span class="home-title">Stimulsoft Server API</span>
+            <span class="home-text">REST API and .NET SDK for users, roles, workspaces, items, schedulers and report export.</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Stimulsoft.Cloud.API.Manual/">
+            <span class="home-title">Stimulsoft Cloud API</span>
+            <span class="home-text">REST and .NET API of Stimulsoft Cloud: authentication, items, templates, snapshots, schedulers, export.</span>
+          </a>
+        </li>
+        <li>
+          <a href="/Developer-FAQ/">
+            <span class="home-title">Developer FAQ</span>
+            <span class="home-text">Frequently asked questions for every platform.</span>
+          </a>
+        </li>
     </ul>
-    <footer>
-      <a href="https://www.stimulsoft.com/en">stimulsoft.com</a> ·
-      <a href="https://designer.stimulsoft.com/">Online designer</a> ·
+    <footer id="home-footer">
+      <a href="https://www.stimulsoft.com/en">stimulsoft.com</a> &middot;
+      <a href="https://designer.stimulsoft.com/">Online designer</a> &middot;
       <a href="https://www.stimulsoft.com/en/support">Support</a>
     </footer>
   </main>
+
+  <script>
+    // Search across all sections: the Pagefind indexes of every site are merged
+    var SECTIONS = [
+      ['/Stimulsoft.Reports.Dashboards.User.Manual/', 'Stimulsoft Reports User Manual'],
+      ['/Stimulsoft.Reports.Dashboards.Programming.Manual/', 'Stimulsoft Reports Programming Manual'],
+      ['/Stimulsoft.Server.Manual/', 'Stimulsoft Server User Manual'],
+      ['/Stimulsoft.Server.API.Manual/', 'Stimulsoft Server API'],
+      ['/Stimulsoft.Cloud.API.Manual/', 'Stimulsoft Cloud API'],
+      ['/Developer-FAQ/', 'Developer FAQ']
+    ];
+    var searchInput = document.getElementById('search-input');
+    var searchResults = document.getElementById('search-results');
+    var pagefindInstance = null;
+
+    async function initPagefind() {
+      if (pagefindInstance) return;
+      try {
+        const pf = await import(SECTIONS[0][0] + 'pagefind/pagefind.js');
+        await pf.options({ baseUrl: SECTIONS[0][0] });
+        for (var i = 1; i < SECTIONS.length; i++) {
+          try {
+            await pf.mergeIndex(SECTIONS[i][0] + 'pagefind/', { baseUrl: SECTIONS[i][0] });
+          } catch(e) {}
+        }
+        await pf.init();
+        pagefindInstance = pf;
+      } catch(e) {}
+    }
+
+    function sectionName(url) {
+      for (var i = 0; i < SECTIONS.length; i++) {
+        if (url.indexOf(SECTIONS[i][0]) === 0) return SECTIONS[i][1];
+      }
+      return '';
+    }
+
+    function escapeHtml(text) {
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    searchInput.addEventListener('focus', initPagefind);
+
+    searchInput.addEventListener('input', async function() {
+      var q = this.value.trim();
+      if (!q) { searchResults.innerHTML = ''; searchResults.classList.remove('visible'); return; }
+      await initPagefind();
+      if (!pagefindInstance) return;
+      var results = await pagefindInstance.search(q);
+      if (q !== this.value.trim()) return;
+      if (!results.results.length) {
+        searchResults.innerHTML = '<div id="search-empty">No results for "' + escapeHtml(q) + '"</div>';
+        searchResults.classList.add('visible');
+        return;
+      }
+      var html = '';
+      var seen = {};
+      var count = 0;
+      for (var r of results.results.slice(0, 20)) {
+        if (count === 10) break;
+        var data = await r.data();
+        if (seen[data.url]) continue;
+        seen[data.url] = true;
+        count++;
+        html += '<a href="' + data.url + '">'
+          + '<div class="search-result-section">' + sectionName(data.url) + '</div>'
+          + '<div class="search-result-title">' + (data.meta.title || 'Untitled') + '</div>'
+          + '<div class="search-result-excerpt">' + (data.excerpt || '') + '</div>'
+          + '</a>';
+      }
+      searchResults.innerHTML = html;
+      searchResults.classList.add('visible');
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('header-search').contains(e.target)) {
+        searchResults.classList.remove('visible');
+      }
+    });
+
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { searchResults.classList.remove('visible'); this.blur(); }
+    });
+  </script>
+  <script>
+    // ── Theme toggle ──
+    (function() {
+      function applyHljsTheme(theme) {
+        var light = document.getElementById('hljs-light');
+        var dark = document.getElementById('hljs-dark');
+        if (light && dark) {
+          light.disabled = (theme === 'dark');
+          dark.disabled = (theme !== 'dark');
+        }
+      }
+
+      var themeToggle = document.getElementById('theme-toggle');
+      // Apply hljs theme on initial load
+      applyHljsTheme(document.documentElement.getAttribute('data-theme') || 'light');
+
+      themeToggle.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        applyHljsTheme(next);
+      });
+
+      // Listen for OS theme changes (only if user hasn't set manual preference)
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+          var theme = e.matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          applyHljsTheme(theme);
+        }
+      });
+    })();
+  </script>
+  <script>
+    // ── Mobile search toggle ──
+    var searchToggle = document.getElementById('search-toggle');
+    var searchClose = document.getElementById('search-close');
+    var siteHeader = document.getElementById('site-header');
+
+    searchToggle.addEventListener('click', function() {
+      siteHeader.classList.add('search-open');
+      document.getElementById('search-input').focus();
+    });
+
+    searchClose.addEventListener('click', function() {
+      siteHeader.classList.remove('search-open');
+      searchInput.value = '';
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('visible');
+    });
+  </script>
 </body>
 </html>
